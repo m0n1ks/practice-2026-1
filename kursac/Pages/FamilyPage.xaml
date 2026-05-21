@@ -1,0 +1,180 @@
+<UserControl x:Class="FamilyBudget.Pages.FamilyPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:FamilyBudget.Converters"
+             Background="Transparent">
+    <UserControl.Resources>
+        <conv:HexToBrushConverter x:Key="HexBrush"/>
+        <conv:BalanceToColorConverter x:Key="BalColor"/>
+        <conv:DecimalToMoneyConverter x:Key="Money"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" x:Name="MainScroll">
+            <StackPanel Margin="14,10,14,16">
+                <Grid Margin="0,0,0,14">
+                    <StackPanel>
+                        <TextBlock Text="Моя семья" Foreground="White"
+                                   FontSize="20" FontWeight="Bold" FontFamily="Segoe UI"/>
+                        <TextBlock x:Name="TxtFamilySubtitle"
+                                   Text="0 членов семьи" Foreground="{StaticResource TextMutedBrush}"
+                                   FontSize="12" FontFamily="Segoe UI"/>
+                    </StackPanel>
+                    <Button HorizontalAlignment="Right" Style="{StaticResource FABStyle}"
+                            Width="48" Height="48" Click="AddMemberBtn_Click" ToolTip="Добавить члена семьи">
+                        <TextBlock Text="+" Foreground="White" FontSize="22" FontWeight="Bold" FontFamily="Segoe UI"
+                                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Button>
+                </Grid>
+                <ItemsControl x:Name="MembersList">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border CornerRadius="18" Margin="0,0,0,10"
+                                    BorderBrush="{StaticResource CardBorderBrush}" BorderThickness="1">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                        <GradientStop Color="#1E0E2E" Offset="0"/>
+                                        <GradientStop Color="#270F33" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <Border.Effect>
+                                    <DropShadowEffect Color="#000000" BlurRadius="12" ShadowDepth="2" Opacity="0.3"/>
+                                </Border.Effect>
+
+                                <StackPanel Margin="16,14">
+                                    <Grid Margin="0,0,0,12">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Width="52" Height="52" CornerRadius="26"
+                                                Background="{Binding AvatarColor, Converter={StaticResource HexBrush}}"
+                                                Margin="0,0,14,0">
+                                            <TextBlock Text="{Binding Initials}" Foreground="White"
+                                                       FontSize="20" FontWeight="Bold" FontFamily="Segoe UI"
+                                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Name}" Foreground="White"
+                                                       FontSize="16" FontWeight="Bold" FontFamily="Segoe UI"/>
+                                            <TextBlock Text="{Binding Role}" Foreground="{StaticResource TextSecBrush}"
+                                                       FontSize="12" FontFamily="Segoe UI"/>
+                                        </StackPanel>
+                                        <Button Grid.Column="2" Style="{StaticResource FlatBtn}"
+                                                Tag="{Binding Id}" Click="DeleteMember_Click"
+                                                ToolTip="Удалить">
+                                            <Border Width="28" Height="28" CornerRadius="8" Background="#3A1525">
+                                                <TextBlock Text="🗑" FontSize="14"
+                                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </Button>
+                                    </Grid>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border Grid.Column="0" Background="#1A0D26" CornerRadius="10" Padding="10,8" Margin="0,0,4,0">
+                                            <StackPanel>
+                                                <TextBlock Text="Доходы" Foreground="{StaticResource TextMutedBrush}"
+                                                           FontSize="9" FontFamily="Segoe UI"/>
+                                                <TextBlock x:Name="IncTxt" Foreground="{StaticResource IncomeBrush}"
+                                                           FontSize="12" FontWeight="Bold" FontFamily="Segoe UI"/>
+                                            </StackPanel>
+                                        </Border>
+                                        <Border Grid.Column="1" Background="#1A0D26" CornerRadius="10" Padding="10,8" Margin="2,0,2,0">
+                                            <StackPanel>
+                                                <TextBlock Text="Расходы" Foreground="{StaticResource TextMutedBrush}"
+                                                           FontSize="9" FontFamily="Segoe UI"/>
+                                                <TextBlock x:Name="ExpTxt" Foreground="{StaticResource ExpenseBrush}"
+                                                           FontSize="12" FontWeight="Bold" FontFamily="Segoe UI"/>
+                                            </StackPanel>
+                                        </Border>
+                                        <Border Grid.Column="2" Background="#1A0D26" CornerRadius="10" Padding="10,8" Margin="4,0,0,0">
+                                            <StackPanel>
+                                                <TextBlock Text="Баланс" Foreground="{StaticResource TextMutedBrush}"
+                                                           FontSize="9" FontFamily="Segoe UI"/>
+                                                <TextBlock x:Name="BalTxt" FontSize="12" FontWeight="Bold" FontFamily="Segoe UI"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </Grid>
+
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Border Background="{StaticResource CardGradBrush}"
+                        BorderBrush="{StaticResource CardBorderBrush}" BorderThickness="1"
+                        CornerRadius="14" Padding="16,12" Margin="0,6,0,0">
+                    <StackPanel>
+                        <TextBlock Text="💡  Выберите цвет при добавлении члена семьи"
+                                   Foreground="{StaticResource TextMutedBrush}"
+                                   FontSize="11" FontFamily="Segoe UI" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
+        <Border x:Name="AddMemberOverlay" Visibility="Collapsed"
+                Background="#CC000000" CornerRadius="0">
+            <Border Background="{StaticResource CardGradBrush}"
+                    BorderBrush="{StaticResource CardBorderBrush}" BorderThickness="1"
+                    CornerRadius="20" Padding="22,22"
+                    VerticalAlignment="Center" Margin="18,0">
+                <Border.Effect>
+                    <DropShadowEffect Color="#E91E8C" BlurRadius="30" ShadowDepth="0" Opacity="0.3"/>
+                </Border.Effect>
+                <StackPanel>
+                    <Grid Margin="0,0,0,16">
+                        <TextBlock Text="➕  Новый член семьи" Foreground="White"
+                                   FontSize="16" FontWeight="Bold" FontFamily="Segoe UI"/>
+                        <Button HorizontalAlignment="Right" Style="{StaticResource FlatBtn}"
+                                Click="CloseAddOverlay_Click">
+                            <TextBlock Text="✕" Foreground="{StaticResource TextMutedBrush}" FontSize="16"/>
+                        </Button>
+                    </Grid>
+
+                    <TextBlock Text="Имя" Foreground="{StaticResource TextSecBrush}"
+                               FontSize="12" FontFamily="Segoe UI" Margin="0,0,0,6"/>
+                    <TextBox x:Name="TxtNewName" Style="{StaticResource ModernTB}"
+                             Margin="0,0,0,12"/>
+
+                    <TextBlock Text="Роль в семье" Foreground="{StaticResource TextSecBrush}"
+                               FontSize="12" FontFamily="Segoe UI" Margin="0,0,0,6"/>
+                    <TextBox x:Name="TxtNewRole" Style="{StaticResource ModernTB}"
+                             Margin="0,0,0,12"/>
+
+                    <TextBlock Text="Цвет аватара" Foreground="{StaticResource TextSecBrush}"
+                               FontSize="12" FontFamily="Segoe UI" Margin="0,0,0,8"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+                        <RadioButton x:Name="C1" GroupName="AColor" IsChecked="True" Margin="4,0">
+                            <Border Width="30" Height="30" CornerRadius="15" Background="#E91E8C" Cursor="Hand"/>
+                        </RadioButton>
+                        <RadioButton x:Name="C2" GroupName="AColor" Margin="4,0">
+                            <Border Width="30" Height="30" CornerRadius="15" Background="#7B1FA2" Cursor="Hand"/>
+                        </RadioButton>
+                        <RadioButton x:Name="C3" GroupName="AColor" Margin="4,0">
+                            <Border Width="30" Height="30" CornerRadius="15" Background="#1565C0" Cursor="Hand"/>
+                        </RadioButton>
+                        <RadioButton x:Name="C4" GroupName="AColor" Margin="4,0">
+                            <Border Width="30" Height="30" CornerRadius="15" Background="#00796B" Cursor="Hand"/>
+                        </RadioButton>
+                        <RadioButton x:Name="C5" GroupName="AColor" Margin="4,0">
+                            <Border Width="30" Height="30" CornerRadius="15" Background="#E65100" Cursor="Hand"/>
+                        </RadioButton>
+                        <RadioButton x:Name="C6" GroupName="AColor" Margin="4,0">
+                            <Border Width="30" Height="30" CornerRadius="15" Background="#558B2F" Cursor="Hand"/>
+                        </RadioButton>
+                    </StackPanel>
+
+                    <Button Style="{StaticResource PrimaryBtn}" Content="✅  Добавить в семью"
+                            Click="ConfirmAddMember_Click"/>
+                </StackPanel>
+            </Border>
+        </Border>
+    </Grid>
+</UserControl>
