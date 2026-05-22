@@ -191,7 +191,8 @@ public class NavigationService : INavigationService
 
 Рис. 1 – Главная страница с балансом и последними операциями
 
-<img width="897" height="1490" alt="image" src="https://github.com/user-attachments/assets/cc892e9e-88b5-44d8-9c25-acf9b3ad6080" />
+<img width="488" height="804" alt="image" src="https://github.com/user-attachments/assets/84140b54-a985-4739-aa53-c8aa253d61e1" />
+
 
 *Рис. 2 – Список доходов/расходов с возможностью добавления*
 
