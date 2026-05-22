@@ -125,6 +125,7 @@ WPF (Windows Presentation Foundation) – технология для созда
 
 ### Шаг 2: Добавьте модели данных
 csharp
+'''
 public class Transaction
 {
     public int Id { get; set; }
@@ -134,6 +135,7 @@ public class Transaction
     public DateTime Date { get; set; }
     public string Comment { get; set; }
 }
+'''
 ### Шаг 3: Реализуйте контекст данных для работы с JSON
 csharp
 public class BudgetContext
