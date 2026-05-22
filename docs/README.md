@@ -19,11 +19,13 @@
 ## 1. Настройка Git и репозитория
 
 Был создан общий репозиторий на платформе GitHub (https://github.com/m0n1ks/practice-2026-1). Освоены основные команды:
+```
 git clone <url>
 git checkout -b новая-ветка
 git add .
 git commit -m "Описание изменений"
 git push
+```
 Репозиторий имеет чёткую структуру согласно заданию. Все изменения фиксируются с осмысленными сообщениями. Ведётся работа в ветках feature/* с последующим слиянием через pull request.
 
 ## 2. Документирование в Markdown
@@ -185,13 +187,16 @@ public class NavigationService : INavigationService
 ### 6.4 Тестирование
 Для проверки работы приложения написаны unit-тесты (NUnit) для класса BudgetContext и методов фильтрации транзакций. Протестирована корректность добавления, редактирования и подсчёта баланса. Скриншоты работы WPF-приложения приведены ниже.
 
-https://site/images/home_page.png
+<img width="414" height="692" alt="image" src="https://github.com/user-attachments/assets/45ee54a8-7f3c-4b6b-90c8-1f135f47995f" />
+
 Рис. 1 – Главная страница с балансом и последними операциями
 
-https://site/images/transactions_page.png
+<img width="897" height="1490" alt="image" src="https://github.com/user-attachments/assets/cc892e9e-88b5-44d8-9c25-acf9b3ad6080" />
+
 *Рис. 2 – Список доходов/расходов с возможностью добавления*
 
-https://site/images/statistics_page.png
+<img width="488" height="804" alt="image" src="https://github.com/user-attachments/assets/1d1a0206-bfda-405d-bf01-c3e90d352cbb" />
+
 Рис. 3 – Диаграмма расходов по категориям
 
 ## 7. Модификация проекта
