@@ -125,7 +125,7 @@ WPF (Windows Presentation Foundation) – технология для созда
 
 ### Шаг 2: Добавьте модели данных
 csharp
-'''
+```
 public class Transaction
 {
     public int Id { get; set; }
@@ -135,9 +135,10 @@ public class Transaction
     public DateTime Date { get; set; }
     public string Comment { get; set; }
 }
-'''
+```
 ### Шаг 3: Реализуйте контекст данных для работы с JSON
 csharp
+```
 public class BudgetContext
 {
     private readonly string _transactionsFile = "transactions.json";
@@ -162,6 +163,7 @@ public class BudgetContext
         File.WriteAllText(_transactionsFile, json);
     }
 }
+```
 ### Шаг 4: Создайте главную страницу и ViewModel
 Добавьте Page (HomePage.xaml) и соответствующую HomeViewModel. В XAML расположите Frame и кнопки навигации. В коде задайте начальную страницу.
 
@@ -172,12 +174,14 @@ public class BudgetContext
 В главном окне добавьте Frame с именем MainFrame. В ViewModel используйте сервис навигации:
 
 csharp
+```
 public class NavigationService : INavigationService
 {
     private readonly Frame _frame;
     public NavigationService(Frame frame) { _frame = frame; }
     public void NavigateTo(Page page) => _frame.Navigate(page);
 }
+```
 ### 6.4 Тестирование
 Для проверки работы приложения написаны unit-тесты (NUnit) для класса BudgetContext и методов фильтрации транзакций. Протестирована корректность добавления, редактирования и подсчёта баланса. Скриншоты работы WPF-приложения приведены ниже.
 
